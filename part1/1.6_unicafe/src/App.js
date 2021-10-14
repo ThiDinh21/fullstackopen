@@ -6,16 +6,6 @@ const App = () => {
 	const [neutral, setNeutral] = useState(0);
 	const [bad, setBad] = useState(0);
 
-	const getAvgRating = () => {
-		if (good === 0 && neutral === 0 && bad === 0) return 0;
-		return (good - bad) / (good + bad + neutral);
-	};
-
-	const getPositiveRating = () => {
-		if (good === 0 && neutral === 0 && bad === 0) return 0;
-		return good / (good + bad + neutral);
-	};
-
 	return (
 		<div>
 			<h1>give feedback</h1>
@@ -26,11 +16,31 @@ const App = () => {
 			/>
 			<RateButton text="bad" handler={() => setBad(bad + 1)} />
 			<h1>statistics</h1>
-			<Statistics text="good" num={good} />
-			<Statistics text="neutral" num={neutral} />
-			<Statistics text="bad" num={bad} />
-			<Statistics text="average" num={getAvgRating()} />
-			<Statistics
+			<Statistics nums={{ good: good, neutral: neutral, bad: bad }} />
+		</div>
+	);
+};
+
+const Statistics = ({ nums }) => {
+	const { good, neutral, bad } = nums;
+
+  if (good === 0 && neutral === 0 && bad === 0) return <p>No feedback given</p>;
+
+	const getAvgRating = () => {
+		return (good - bad) / (good + bad + neutral);
+	};
+
+	const getPositiveRating = () => {
+		return good / (good + bad + neutral) * 100;
+	};
+
+	return (
+		<div>
+			<RateResult text="good" num={good} />
+			<RateResult text="neutral" num={neutral} />
+			<RateResult text="bad" num={bad} />
+			<RateResult text="average" num={getAvgRating()} />
+			<RateResult
 				text="positive"
 				num={getPositiveRating()}
 				afterText="%"
@@ -43,7 +53,7 @@ const RateButton = ({ text, handler }) => (
 	<button onClick={handler}>{text}</button>
 );
 
-const Statistics = ({ text, num, afterText }) => (
+const RateResult = ({ text, num, afterText }) => (
 	<p>
 		{text} {num} {afterText}
 	</p>
