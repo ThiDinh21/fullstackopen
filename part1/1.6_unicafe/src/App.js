@@ -26,11 +26,11 @@ const App = () => {
 			/>
 			<RateButton text="bad" handler={() => setBad(bad + 1)} />
 			<h1>statistics</h1>
-			<RateResult text="good" num={good} />
-			<RateResult text="neutral" num={neutral} />
-			<RateResult text="bad" num={bad} />
-			<RateResult text="average" num={getAvgRating()} />
-			<RateResult
+			<Statistics text="good" num={good} />
+			<Statistics text="neutral" num={neutral} />
+			<Statistics text="bad" num={bad} />
+			<Statistics text="average" num={getAvgRating()} />
+			<Statistics
 				text="positive"
 				num={getPositiveRating()}
 				afterText="%"
@@ -43,7 +43,7 @@ const RateButton = ({ text, handler }) => (
 	<button onClick={handler}>{text}</button>
 );
 
-const RateResult = ({ text, num, afterText }) => (
+const Statistics = ({ text, num, afterText }) => (
 	<p>
 		{text} {num} {afterText}
 	</p>
