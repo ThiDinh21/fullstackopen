@@ -24,28 +24,31 @@ const App = () => {
 const Statistics = ({ nums }) => {
 	const { good, neutral, bad } = nums;
 
-  if (good === 0 && neutral === 0 && bad === 0) return <p>No feedback given</p>;
+	if (good === 0 && neutral === 0 && bad === 0)
+		return <p>No feedback given</p>;
 
 	const getAvgRating = () => {
 		return (good - bad) / (good + bad + neutral);
 	};
 
 	const getPositiveRating = () => {
-		return good / (good + bad + neutral) * 100;
+		return (good / (good + bad + neutral)) * 100;
 	};
 
 	return (
-		<div>
-			<RateResult text="good" num={good} />
-			<RateResult text="neutral" num={neutral} />
-			<RateResult text="bad" num={bad} />
-			<RateResult text="average" num={getAvgRating()} />
-			<RateResult
+		<table>
+      <tbody>
+			<StatisticLine text="good" num={good} />
+			<StatisticLine text="neutral" num={neutral} />
+			<StatisticLine text="bad" num={bad} />
+			<StatisticLine text="average" num={getAvgRating()} />
+			<StatisticLine
 				text="positive"
 				num={getPositiveRating()}
 				afterText="%"
 			/>
-		</div>
+      </tbody>
+		</table>
 	);
 };
 
@@ -53,10 +56,13 @@ const RateButton = ({ text, handler }) => (
 	<button onClick={handler}>{text}</button>
 );
 
-const RateResult = ({ text, num, afterText }) => (
-	<p>
-		{text} {num} {afterText}
-	</p>
+const StatisticLine = ({ text, num, afterText }) => (
+	<tr>
+		<td>{text}</td>
+		<td>
+			{num}{afterText}
+		</td>
+	</tr>
 );
 
 export default App;
