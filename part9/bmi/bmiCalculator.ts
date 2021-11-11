@@ -27,7 +27,7 @@ export const calculateBmi = (h: number, w: number): BmiResult => {
 	};
 };
 
-export const validateInput = (h: any, w: any): boolean => {
+export const validateInput = (h: number, w: number): boolean => {
 	return !isNaN(h) && !isNaN(w);
 };
 
