@@ -1,8 +1,3 @@
-// interface Input {
-// 	height: number;
-// 	weight: number;
-// }
-
 interface BmiResult {
 	height: number;
 	weight: number;
@@ -30,28 +25,3 @@ export const calculateBmi = (h: number, w: number): BmiResult => {
 export const validateInput = (h: number, w: number): boolean => {
 	return !isNaN(h) && !isNaN(w);
 };
-
-// const parseArguments = (args: string[]): Input => {
-// 	if (args.length < 4) throw new Error("Not enough arguments");
-// 	if (args.length > 4) throw new Error("Too many arguments");
-
-// 	if (!isNaN(Number(args[2])) && !isNaN(Number(args[3]))) {
-// 		return {
-// 			height: Number(args[2]),
-// 			weight: Number(args[3]),
-// 		};
-// 	} else {
-// 		throw new Error("Provided values were not numbers!");
-// 	}
-// };
-
-// try {
-// 	const input = parseArguments(process.argv);
-// 	console.log(calculateBmi(input.weight, input.height));
-// } catch (error: unknown) {
-// 	let errorMessage = "Something bad happened.";
-// 	if (error instanceof Error) {
-// 		errorMessage += " Error: " + error.message;
-// 	}
-// 	console.log(errorMessage);
-// }
