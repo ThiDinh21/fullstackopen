@@ -47,8 +47,14 @@ const App = () => {
 		} else {
 			phonebookService
 				.create(newPerson)
-				.then((data) => setPersons(persons.concat(data)));
-			setMsg(`Added ${newName}`);
+				.then((data) => {
+					setPersons(persons.concat(data));
+					setMsg(`Added ${newName}`);
+				})
+				.catch((error) => {
+					setErr(error.response.data.error);
+					setTimeout(() => setErr(null), 5000);
+				});
 		}
 
 		setNewName("");
