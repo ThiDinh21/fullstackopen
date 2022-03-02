@@ -1,23 +1,23 @@
 const blogRouter = require("express").Router();
 const Blog = require("../models/blog");
 
-blogRouter.get("/", async (_request, response) => {
+blogRouter.get("/", async (_req, resp) => {
 	let blogs = await Blog.find({});
-	response.json(blogs);
+	resp.json(blogs);
 });
 
-blogRouter.post("/", async (request, response) => {
-	const blog = new Blog(request.body);
+blogRouter.post("/", async (req, resp) => {
+	const blog = new Blog(req.body);
 
 	if (blog.url === undefined || blog.title === undefined) {
-		response.status(400).send("Bad Request");
+		resp.status(400).send("Bad Request");
 	} else {
 		if (blog.likes === undefined) {
 			blog.likes = 0;
 		}
 
 		let result = await blog.save();
-		response.status(201).json(result);
+		resp.status(201).json(result);
 	}
 });
 
